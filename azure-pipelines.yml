@@ -6,7 +6,7 @@ parameters:
 - name: succeed
   displayName: Succeed or fail
   type: boolean
-  default: false
+  default: true
 
 trigger:
 - main
