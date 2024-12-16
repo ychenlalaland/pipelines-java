@@ -12,7 +12,7 @@ trigger:
 - main
 
 pool:
-  vmImage: window 2019
+  vmImage: "window - latest"
 
 jobs:
 - job: Work
