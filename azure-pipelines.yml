@@ -2,28 +2,25 @@
 # Build your Java project and run tests with Apache Maven.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
+parameters:
+- name: succeed
+  displayName: Succeed or fail
+  type: boolean
+  default: false
 
 trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: window 2019
 
-steps:
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.11'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: |
-      # Write your commands here
-      
-      echo 'Hello world from' $(YANFEIVARIABLE)
+jobs:
+- job: Work
+  steps:
+  - script: echo Hello, world!
+    displayName: 'Run a one-line script'
+
+  # This malformed command causes the job to fail
+  # Only run this command if the succeed variable is set to false
+  - script: git clone malformed input
+    condition: eq(${{ parameters.succeed }}, false)
